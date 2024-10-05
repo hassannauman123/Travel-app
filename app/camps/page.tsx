@@ -1,4 +1,3 @@
-// app/camps/page.tsx
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -19,14 +18,16 @@ const CampsPage = () => {
 
   useEffect(() => {
     const fetchCamps = async () => {
-      const res = await fetch('/api/ViewAllCamps');
+      const res = await fetch('/api/ViewAllCamps', {
+        cache: 'no-store', // This ensures no caching in the fetch request
+      });
       const data = await res.json();
       setCamps(data);
       setLoading(false);
     };
 
     fetchCamps();
-  }, []);
+  }, []); // This empty array ensures the effect runs only once after the initial render
 
   if (loading) {
     return <p>Loading camps...</p>;
