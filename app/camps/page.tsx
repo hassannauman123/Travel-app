@@ -1,6 +1,8 @@
 // app/camps/page.tsx
 'use client';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Button from '../components/Button';
 
 interface Camp {
   _id: string;
@@ -22,7 +24,7 @@ const CampsPage = () => {
       setCamps(data);
       setLoading(false);
     };
-    
+
     fetchCamps();
   }, []);
 
@@ -33,6 +35,13 @@ const CampsPage = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">All Camps</h1>
+      <Link href="/post-camp">
+        <Button
+          type="button"
+          title="Post a Camp"
+          variant="btn_green"
+        />
+      </Link>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {camps.map((camp) => (
           <div key={camp._id} className="border rounded-lg p-4">
